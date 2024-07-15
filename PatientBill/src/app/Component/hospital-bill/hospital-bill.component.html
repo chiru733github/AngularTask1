@@ -1,0 +1,73 @@
+<h2>Hospital Bill</h2>
+    <form>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Bill Number:</td>
+                    <td >
+                        <input *ngIf="!Patients" type="text" [(ngModel)]="patientDetails.bill_No" name="billNumber" placeholder="Bill Number">
+                        <select *ngIf="Patients" [(ngModel)]="selectedBillNo" name="selectedBillNo" (ngModelChange)="GetById(selectedBillNo)">
+                            <option *ngFor="let p of PatientsList" [value]="p.bill_No" >{{ p.bill_No }}</option>
+                          </select>
+                    </td>
+                    
+                    <td>Bill Date:</td>
+                    <td><input type="date" [(ngModel)]="patientDetails.bill_Date" name="billDate" placeholder="DD/MM/YYYY Time : HH/MM"></td>
+                </tr>
+                <tr>
+                    <td>Patient Name:</td>
+                    <td><input type="text" [(ngModel)]="patientDetails.patient_Name" name="patientName" placeholder="Patient Name"></td>
+                    <td>Gender:</td>
+                    <td>
+                        <select name="gender"[(ngModel)]="patientDetails.gender" [value]="patientDetails.gender">
+                            <option value=""></option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Date of Birth:</td>
+                    <td><input type="date" [(ngModel)]="patientDetails.dob" name="dob"></td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td colspan="3"><input type="text" [(ngModel)]="patientDetails.address" name="address" placeholder="Address"></td>
+                </tr>
+                <tr>
+                    <td>Email ID:</td>
+                    <td><input type="email" [(ngModel)]="patientDetails.email_Id" name="email"></td>
+                    <td>Mobile Number:</td>
+                    <td><input type="text" [(ngModel)]="patientDetails.mobile_No" name="mobile"></td>
+                </tr>
+                <tr>
+                    <td>Investigation:</td>
+                    <td>
+                        <select name="investigation">
+                           <option value=""></option>
+                        </select>
+                    </td>
+                    <td>Fee:</td>
+                    <td><input type="text"  name="fee"></td>
+                    <td><button type="button" onclick="addToGrid()">Add To Grid</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="grid">
+            <thead>
+                <tr>
+                    <th>S No</th>
+                    <th>Investigation</th>
+                    <th>Fees</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            
+        </table>
+        <button type="button">Add</button>
+        <button (click)="Edit();" >Edit</button>
+        <button (click)="AddOrEditButton();" style="background-color: rgb(68, 68, 196); color: white;">Save</button>
+        <button type="button">Clear</button>
+        <button type="button">Export</button>
+        <button type="button">Print</button>
+    </form>
